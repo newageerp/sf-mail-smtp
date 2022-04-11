@@ -39,7 +39,10 @@ class SmtpSendMailService extends MailSendService
         }
 
         //Recipients
-        $mail->setFrom($_ENV['SF_MAIL_SMTP_FROM_EMAIL'], $_ENV['SF_MAIL_SMTP_FROM_NAME']);
+        $mail->setFrom(
+            $_ENV['SF_MAIL_SMTP_FROM_EMAIL'],
+            $_ENV['SF_MAIL_SMTP_FROM_NAME']
+        );
         if ($fromEmail !== '') {
             $mail->addReplyTo($fromEmail, $fromName);
         }
