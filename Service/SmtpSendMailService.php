@@ -24,8 +24,8 @@ class SmtpSendMailService extends MailSendService
         $mail->SMTPAuth = true;
         $mail->Username = $_ENV['SF_MAIL_SMTP_USER'];
         $mail->Password = $_ENV['SF_MAIL_SMTP_PSW'];
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port = 465;
+        $mail->SMTPSecure = $_ENV['SF_MAIL_SMTP_SECURE'];
+        $mail->Port = (int)$_ENV['SF_MAIL_SMTP_PORT'];
         $mail->CharSet = 'UTF-8';
         $mail->Encoding = 'base64';
 
@@ -39,7 +39,7 @@ class SmtpSendMailService extends MailSendService
         }
 
         //Recipients
-        $mail->setFrom('order@pwgroup.lt', 'Order | PW Group');
+        $mail->setFrom($_ENV['SF_MAIL_SMTP_FROM_EMAIL'], $_ENV['SF_MAIL_SMTP_FROM_NAME']);
         if ($fromEmail !== '') {
             $mail->addReplyTo($fromEmail, $fromName);
         }
